@@ -18,7 +18,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MassData.Domain\MassData.Domain.csproj" />
     <ProjectReference Include="..\MassData.Repository\MassData.Repository.csproj" />
+    <ProjectReference Include="..\MassData.Service\MassData.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>

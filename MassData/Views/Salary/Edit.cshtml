@@ -1,0 +1,70 @@
+﻿@model Salary
+@{
+    ViewData["Title"] = "Edit Salary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<div class="">
+    <form enctype="multipart/form-data"   asp-action="Edit" asp-controller="Salary">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="@Model.Id" />
+        <div class="form-group row mt-2">
+            <div class="col-2 text-primary">
+                <label asp-for="EmployeeName"></label>
+            </div>
+            <div class="col-4">
+                <input type="text" required class="form-control" placeholder="Employee Name" asp-for="EmployeeName" />
+            </div>
+            <span asp-validation-for="EmployeeName" class="text-danger"></span>
+        </div>
+        <div class="form-group row mt-2">
+            <div class="col-2 text-primary">
+                <label asp-for="SalaryAmount"></label>
+            </div>
+            <div class="col-4">
+                <input type="text" required class="form-control" placeholder="Salary Amount" asp-for="SalaryAmount" />
+            </div>
+            <span asp-validation-for="SalaryAmount" class="text-danger"></span>
+        </div>
+        <div class="form-group row mt-2">
+            <div class="col-2 text-primary">
+                <label asp-for="SalaryStatus"></label>
+            </div>
+            <div class="col-4">
+                @* <input type="text" required class="form-control" placeholder="Salary Status" asp-for=".SalaryStatus" /> *@
+                <select asp-for="SalaryStatus" class="form-select-sm">
+                    <option value="paid">Paid</option>
+                    <option value="unpaid">Unpaid</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row mt-2">
+            <div class="col-2 text-primary">
+                <label asp-for="SalaryReceivingDate"></label>
+            </div>
+            <div class="col-4">
+                <input type="date" required class="form-control" placeholder="SalaryReceivingDate" asp-for="SalaryReceivingDate" />
+            </div>
+        </div>
+
+        <div class="form-group row mt-2">
+            <div class="col-2 text-primary">
+                <label>Upload File</label>
+            </div>
+            <div class="col-4 mt-2">
+                <input type="file" name="files" multiple class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2 offset-2 text-primary">
+                <button type="submit" class="btn btn-info form-control mt-2"><i class="fa-solid fa-floppy-disk"></i> &nbsp; Save</button>
+            </div>
+            <div class="col-2">
+                <a class="btn btn-dark text-white form-control mt-2" asp-controller="Salary" asp-action="Index"><i class="fas fa-arrow-left"></i> &nbsp; Close</a>
+            </div>
+        </div>
+    </form>
+</div>

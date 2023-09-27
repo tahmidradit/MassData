@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Salary>
+
+<div id="indexCard" class="card text-white">
+    <div class="card-header bg-primary">Category List</div>
+    <div class="card-body text-dark">
+        <div align="right">
+            <a type="button" class="btn btn-info text-white" asp-controller="Salary" asp-action="Create" ><i class="fas fa-plus"></i> &nbsp; Create</a>
+
+            @{
+                await Html.RenderPartialAsync("_salaryIndexTable");
+            }
+        </div>
+    </div>
+</div>
+
+
+     

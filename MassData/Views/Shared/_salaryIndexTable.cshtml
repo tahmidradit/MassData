@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Salary>
+
+<div>
+    @if (Model.Count() > 0)
+    {
+        <div class="mt-2">
+            <table id="salaryIndexTable" class="table table-hover table-bordered table-sm text-center" style="background-color:lightskyblue" width="100%">
+                <thead class="table table-primary">
+                    <tr>
+                        <th>@Html.DisplayNameFor(m => m.Id)</th>
+                        <th>@Html.DisplayNameFor(m => m.EmployeeName)</th>
+                        <th>@Html.DisplayNameFor(m => m.SalaryAmount)</th>
+                        <th>@Html.DisplayNameFor(m => m.SalaryStatus)</th>
+                        <th>@Html.DisplayNameFor(m => m.SalaryReceivingDate)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var items in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(m => items.Id)</td>
+                            <td>@Html.DisplayFor(m => items.EmployeeName)</td>
+                            <td>@Html.DisplayFor(m => items.SalaryAmount)</td>
+                            <td>@Html.DisplayFor(m => items.SalaryStatus)</td>
+                            <td>@Html.DisplayFor(m => items.SalaryReceivingDate)</td>
+                            <td>
+                                <a asp-controller="Salary" asp-action="Edit" asp-route-id="@items.Id" class="btn btn-dark text-white btn-sm"><i class="fas fa-edit"></i> &nbsp; Edit</a>
+                                <a class="btn btn-danger text-white btn-sm" asp-action="Delete" asp-controller="Salary" asp-route-id="@items.Id"><i class="fas fa-trash-alt"></i> &nbsp; Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <br />
+        <div class="alert alert-danger text-danger" role="alert">No categories available right now !</div>
+    }
+</div>

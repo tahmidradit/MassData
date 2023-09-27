@@ -1,6 +1,11 @@
-﻿using MassData.Domain.Entity;
+﻿using Azure.Core;
+using MassData.Domain.Entity;
 using MassData.Repository.Data;
 using MassData.Repository.Repositories;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,11 +19,15 @@ namespace MassData.Service.Services
 {
     public class SalaryService : ISalary
     {
-        private readonly ApplicationDbContext context;
+        [BindProperty]
+        Salary salaryModel { get; set; }
 
+        private readonly ApplicationDbContext context;
+        
         public SalaryService(ApplicationDbContext context)
         {
             this.context = context;
+            salaryModel = new Salary();
         }
 
         public async Task<Salary> AddSalary(Salary salary)
@@ -42,17 +51,14 @@ namespace MassData.Service.Services
 
             return findById;
         }
-
-        public async Task<Salary> EditSalary(Salary salary)
+        
+        public async Task<Salary> EditSalary(int id,Salary salary)
         {
-            var findById = await context.Salaries.FirstOrDefaultAsync(x => x.Id == salary.Id);
+            
 
-            if (findById == null)
-            {
-                throw new Exception("Salary Information Not Found");
-            }
 
-            context.Update(findById);
+            context.Update(salary);
+    
             await context.SaveChangesAsync();
 
             return salary;
