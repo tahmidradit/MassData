@@ -38,7 +38,7 @@ namespace MassData.Controllers
         {
             await this.salary.AddSalary(salary);
 
-            //Work on the image saving section
+            //File upload
 
             string webRootPath = webHostingEnvironment.WebRootPath;
             var files = HttpContext.Request.Form.Files;
@@ -81,35 +81,41 @@ namespace MassData.Controllers
             return View(findById);
         }
 
-        [HttpPut, ActionName("Edit"), ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditPut(int id, Salary salaryModel)
+        [HttpPost, ActionName("Edit")]
+        public async Task<IActionResult> Edit(Salary salaryModel)
         {
-            await salary.EditSalary(id, salaryModel);
+            await salary.EditSalary(salaryModel);
 
+            var findById = await context.Salaries.FirstOrDefaultAsync(x => x.Id == salaryModel.Id);
 
-            //Work on the image saving section
+            if (findById == null)
+            {
+                return NotFound();
+            }
 
-            //string webRootPath = webHostingEnvironment.WebRootPath;
-            //var files = HttpContext.Request.Form.Files;
+            //File upload
 
-            //var findProductsById = await context.Salaries.FindAsync(id);
+            string webRootPath = webHostingEnvironment.WebRootPath;
+            var files = HttpContext.Request.Form.Files;
 
-            //if (files.Count > 0)
-            //{
-            //    //files has been uploaded
-            //    var uploads = Path.Combine(webRootPath, "images");
-            //    var extension = Path.GetExtension(files[0].FileName);
+            
 
-            //    using (var filesStream = new FileStream(Path.Combine(uploads, salaryModel.Id + extension), FileMode.Create))
-            //    {
-            //        files[0].CopyTo(filesStream);
-            //    }
+            if (files.Count > 0)
+            {
+                //files has been uploaded
+                var uploads = Path.Combine(webRootPath, "images");
+                var extension = Path.GetExtension(files[0].FileName);
 
-            //}
-            //else
-            //{
-            //    return NotFound();
-            //}
+                using (var filesStream = new FileStream(Path.Combine(uploads, findById.Id + extension), FileMode.Create))
+                {
+                    files[0].CopyTo(filesStream);
+                }
+
+            }
+            else
+            {
+                return NotFound();
+            }
             return RedirectToAction(nameof(Index));
         }
 

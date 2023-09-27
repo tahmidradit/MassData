@@ -16,7 +16,7 @@ namespace MassData.Repository.Repositories
         Task<IEnumerable<Salary>> GetAll();
         Task<Salary> GetById(int id);
         Task<Salary> AddSalary(Salary salary);
-        Task<Salary> EditSalary(int id, Salary salary);
+        Task<Salary> EditSalary(Salary salary);
         Task<Salary> DeleteSalary(int id);
     }
 }

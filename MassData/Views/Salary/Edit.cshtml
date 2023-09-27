@@ -7,7 +7,7 @@
 <h1>Create</h1>
 
 <div class="">
-    <form enctype="multipart/form-data"   asp-action="Edit" asp-controller="Salary">
+    <form method="post" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="@Model.Id" />
         <div class="form-group row mt-2">

@@ -26,7 +26,10 @@
                             <td>@Html.DisplayFor(m => items.SalaryReceivingDate)</td>
                             <td>
                                 <a asp-controller="Salary" asp-action="Edit" asp-route-id="@items.Id" class="btn btn-dark text-white btn-sm"><i class="fas fa-edit"></i> &nbsp; Edit</a>
-                                <a class="btn btn-danger text-white btn-sm" asp-action="Delete" asp-controller="Salary" asp-route-id="@items.Id"><i class="fas fa-trash-alt"></i> &nbsp; Delete</a>
+                                @if(User.IsInRole("Admin"))
+                                {
+                                    <a class="btn btn-danger text-white btn-sm" asp-action="Delete" asp-controller="Salary" asp-route-id="@items.Id"><i class="fas fa-trash-alt"></i> &nbsp; Delete</a>
+                                }
                             </td>
                         </tr>
                     }

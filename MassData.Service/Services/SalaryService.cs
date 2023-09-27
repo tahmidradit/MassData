@@ -52,15 +52,19 @@ namespace MassData.Service.Services
             return findById;
         }
         
-        public async Task<Salary> EditSalary(int id,Salary salary)
+        public async Task<Salary> EditSalary(Salary salary)
         {
-            
+            var findById = await context.Salaries.FirstOrDefaultAsync(x => x.Id == salary.Id);
 
-
-            context.Update(salary);
-    
+            if (findById == null) 
+            {
+                throw new Exception("Salary Information Not Found");
+            }
+            findById.EmployeeName = salary.EmployeeName;
+            findById.SalaryAmount = salary.SalaryAmount;
+            findById.SalaryStatus = salary.SalaryStatus;
+            findById.SalaryReceivingDate = salary.SalaryReceivingDate;
             await context.SaveChangesAsync();
-
             return salary;
         }
 
